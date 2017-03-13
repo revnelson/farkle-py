@@ -41,13 +41,15 @@ def hand(player, score):
         print("You just rolled:\n%s\n" % ' '.join(current_roll))
 
         # Verify roll has value and check if all-dice
-        verified_roll = point_count([], current_roll)
-        if len(verified_roll[1]) is 0:
-            print("Congratulations, you get to roll them all again!")
-            return [point_count(set_aside, current_roll)[0], 'all']
-        if verified_roll[0] > 0:
+        verified_roll = point_count(set_aside, current_roll)
 
-            # If current roll has value
+        if len(verified_roll[1]) is 0:  # If all dice have value
+
+            print("Congratulations, you get to roll them all again!")
+            return [verified_roll[0], 'all']
+
+        if len(verified_roll[1]) != dice:  # If there's at least one valuable di
+
             print(point_count(set_aside, current_roll)[0])  # TODO Be more informative about scoring
 
             while True:
@@ -56,7 +58,7 @@ def hand(player, score):
 
                 if action == 1:
 
-                    keep = verify_keep(current_roll)  # Keep some dice
+                    keep = verify_keep(set_aside, current_roll)  # Keep some dice
 
                     set_aside.append(keep)  # Add kept dice to list
 

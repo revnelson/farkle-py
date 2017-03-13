@@ -3,7 +3,7 @@ def verify_players():
 
 
 # Gets verified choice of dice to keep from current roll
-def verify_keep(current_roll):
+def verify_keep(set_aside, current_roll):
 
     keep = ''.join(input("Which would you like to hold? ").split())
 
@@ -20,7 +20,7 @@ def verify_keep(current_roll):
             keep = ''.join(input("You entered non-numbers.\nPlease enter only numbers from your current roll of %s.\n"
                                  "Which would you like to hold? " % (' '.join(current_roll))).split())
 
-        non_points = point_count([], [int(x) for x in keep])[1]
+        non_points = point_count(set_aside, [int(x) for x in keep])[1]
 
         if len(non_points) > 0:  # Ensures all dice kept have value
             keep = ''.join(input("The following dice have no value:\n%s\n"
